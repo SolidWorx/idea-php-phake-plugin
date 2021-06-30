@@ -1,19 +1,9 @@
 <idea-plugin>
-    <id>com.github.pierredup.ideaphpphakeplugin</id>
-    <name>idea-php-phake-plugin</name>
-    <vendor>pierredup</vendor>
+    <id>co.solidworx.idea.php.phake</id>
+    <name>Phake</name>
+    <vendor>SolidWorx</vendor>
+    <version>1.0.0</version>
 
-    <!-- Product and plugin compatibility requirements -->
-    <!-- https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.jetbrains.php</depends>
     <depends>com.intellij.modules.platform</depends>
-
-    <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.github.pierredup.ideaphpphakeplugin.services.MyApplicationService"/>
-        <projectService serviceImplementation="com.github.pierredup.ideaphpphakeplugin.services.MyProjectService"/>
-    </extensions>
-
-    <applicationListeners>
-        <listener class="com.github.pierredup.ideaphpphakeplugin.listeners.MyProjectManagerListener"
-                  topic="com.intellij.openapi.project.ProjectManagerListener"/>
-    </applicationListeners>
 </idea-plugin>

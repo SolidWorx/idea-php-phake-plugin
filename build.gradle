@@ -1,0 +1,16 @@
+plugins {
+    id 'java'
+    id "org.jetbrains.intellij" version "1.0"
+}
+
+group pluginGroup
+version pluginVersion
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+}
