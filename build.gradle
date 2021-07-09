@@ -3,6 +3,10 @@ plugins {
     id "org.jetbrains.intellij" version "1.0"
 }
 
+apply plugin: 'idea'
+apply plugin: 'org.jetbrains.intellij'
+apply plugin: 'java'
+
 group pluginGroup
 version pluginVersion
 
@@ -13,4 +17,15 @@ repositories {
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+}
+
+intellij {
+    version = ideaVersion
+    plugins = [
+        "com.jetbrains.php:${phpPluginVersion}",
+    ]
+}
+
+test {
+    useJUnitPlatform()
 }

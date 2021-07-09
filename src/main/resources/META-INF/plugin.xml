@@ -2,8 +2,9 @@
     <id>co.solidworx.idea.php.phake</id>
     <name>Phake</name>
     <vendor>SolidWorx</vendor>
-    <version>1.0.0</version>
+    <version>1.0.0-SNAPSHOT</version>
 
     <depends>com.jetbrains.php</depends>
+    <depends>com.intellij.modules.lang</depends>
     <depends>com.intellij.modules.platform</depends>
 </idea-plugin>
