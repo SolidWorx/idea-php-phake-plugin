@@ -7,4 +7,8 @@
     <depends>com.jetbrains.php</depends>
     <depends>com.intellij.modules.lang</depends>
     <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.jetbrains.php">
+        <typeProvider4 implementation="co.solidworx.idea.php.phake.type.provider.PhakeMockTypeProvider"/>
+    </extensions>
 </idea-plugin>
