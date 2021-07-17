@@ -1,10 +1,14 @@
+import org.jetbrains.changelog.ExtensionsKt
+
 plugins {
     id 'java'
-    id "org.jetbrains.intellij" version "1.0"
+    id 'org.jetbrains.intellij' version '1.1'
+    id 'org.jetbrains.changelog' version '1.1.2'
 }
 
 apply plugin: 'idea'
 apply plugin: 'org.jetbrains.intellij'
+apply plugin: 'org.jetbrains.changelog'
 apply plugin: 'java'
 
 group pluginGroup
@@ -25,8 +29,15 @@ intellij {
     updateSinceUntilBuild = true
     downloadSources = true
     plugins = [
-        "com.jetbrains.php:${phpPluginVersion}",
+        "com.jetbrains.php:${phpPluginVersion}"
     ]
+    patchPluginXml {
+        changeNotes = changelog.getUnreleased().toHTML()
+    }
+}
+
+changelog {
+    version = pluginVersion
 }
 
 runIde {
