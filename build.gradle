@@ -21,9 +21,16 @@ dependencies {
 
 intellij {
     version = ideaVersion
+    type = platformType
+    updateSinceUntilBuild = true
+    downloadSources = true
     plugins = [
         "com.jetbrains.php:${phpPluginVersion}",
     ]
+}
+
+runIde {
+    autoReloadPlugins = true
 }
 
 test {

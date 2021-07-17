@@ -1,4 +1,4 @@
-# idea-php-phake-plugin
+# PHPStorm Phake Plugin
 
 ![Build](https://github.com/SolidWorx/idea-php-phake-plugin/workflows/Build/badge.svg)
 [![Version](https://img.shields.io/jetbrains/plugin/v/PLUGIN_ID.svg)](https://plugins.jetbrains.com/plugin/PLUGIN_ID)

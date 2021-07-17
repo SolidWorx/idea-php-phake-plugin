@@ -1,8 +1,23 @@
 <idea-plugin>
     <id>co.solidworx.idea.php.phake</id>
     <name>Phake</name>
-    <vendor>SolidWorx</vendor>
-    <version>1.0.0-SNAPSHOT</version>
+    <vendor email="open-source@solidworx.co" url="https://github.com/SolidWorx/idea-php-phake-plugin">SolidWorx</vendor>
+    <version>1.0.0</version>
+    <description><![CDATA[
+        PHPStorm PHP plugin for the <a href="https://github.com/phake/phake">Phake</a> mocking framework to allow autocompletion for stubs and mocks.
+      ]]></description>
+
+    <change-notes>
+        <![CDATA[
+        <h3>1.0.0 </h3>
+        <ul>
+            <li>Support autocompletion for mock classes when using Phake::mock</li>
+            <li>Support autocompletion for expectations when using Phake::when</li>
+            <li>Support autocompletion for method verification when using Phake::verify</li>
+        </ul>
+        ]]>
+
+    </change-notes>
 
     <depends>com.jetbrains.php</depends>
     <depends>com.intellij.modules.lang</depends>

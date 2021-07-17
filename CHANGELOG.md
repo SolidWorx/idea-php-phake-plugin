@@ -1,7 +1,9 @@
 <!-- Keep a Changelog guide -> https://keepachangelog.com -->
 
-# idea-php-phake-plugin Changelog
+# PHPStorm Phake Plugin Changelog
 
-## [Unreleased]
-### Added
-- Initial scaffold created from [IntelliJ Platform Plugin Template](https://github.com/JetBrains/intellij-platform-plugin-template)
+## 1.0.0
+
+- Support autocompletion for mock classes when using Phake::mock
+- Support autocompletion for expectations when using Phake::when
+- Support autocompletion for method verification when using Phake::verify
