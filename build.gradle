@@ -32,6 +32,9 @@ intellij {
         "com.jetbrains.php:${phpPluginVersion}"
     ]
     patchPluginXml {
+        version pluginVersion
+        /*sinceBuild pluginSinceBuild
+        untilBuild pluginUntilBuild*/
         changeNotes = changelog.getUnreleased().toHTML()
     }
 }
@@ -49,5 +52,5 @@ test {
 }
 
 runPluginVerifier {
-    ideVersions = ["PS-2020.1.4", "PS-2020.2.4", "PS-2020.3.3", "PS-2021.1.4"]
+    ideVersions = Eval.me(pluginVerifierIdeVersions)
 }
