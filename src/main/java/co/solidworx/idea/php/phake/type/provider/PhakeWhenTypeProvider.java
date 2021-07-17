@@ -38,7 +38,10 @@ class PhakeWhenTypeProvider implements PhpTypeProvider4 {
                 methodRef.isStatic() &&
                 phpExpression != null &&
                 Objects.equals(phpExpression.getName(), "Phake") &&
-                Objects.equals(methodRef.getName(), "when")
+                (
+                    Objects.equals(methodRef.getName(), "when") ||
+                    Objects.equals(methodRef.getName(), "verify")
+                )
             ) {
                 PsiElement[] parameters = methodRef.getParameters();
                 String refSignature = methodRef.getSignature();
