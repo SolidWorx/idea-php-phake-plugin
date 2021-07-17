@@ -33,8 +33,6 @@ intellij {
     ]
     patchPluginXml {
         version pluginVersion
-        /*sinceBuild pluginSinceBuild
-        untilBuild pluginUntilBuild*/
         changeNotes = changelog.getUnreleased().toHTML()
     }
 }
@@ -53,4 +51,5 @@ test {
 
 runPluginVerifier {
     ideVersions = Eval.me(pluginVerifierIdeVersions)
+    verifierVersion = 1.256
 }
