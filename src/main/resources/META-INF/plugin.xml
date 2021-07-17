@@ -10,5 +10,7 @@
 
     <extensions defaultExtensionNs="com.jetbrains.php">
         <typeProvider4 implementation="co.solidworx.idea.php.phake.type.provider.PhakeMockTypeProvider"/>
+        <typeProvider4 implementation="co.solidworx.idea.php.phake.type.provider.PhakeWhenTypeProvider"/>
+        <typeProvider4 implementation="co.solidworx.idea.php.phake.type.provider.PhakeWhenMethodCallTypeProvider"/>
     </extensions>
 </idea-plugin>

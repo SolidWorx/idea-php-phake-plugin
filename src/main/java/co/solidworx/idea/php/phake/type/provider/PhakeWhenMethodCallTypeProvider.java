@@ -5,7 +5,9 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.jetbrains.php.PhpIndex;
+import com.jetbrains.php.lang.psi.PhpPsiUtil;
 import com.jetbrains.php.lang.psi.elements.*;
 import com.jetbrains.php.lang.psi.resolve.types.PhpType;
 import com.jetbrains.php.lang.psi.resolve.types.PhpTypeProvider4;
@@ -15,10 +17,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
-class PhakeMockTypeProvider implements PhpTypeProvider4 {
-
-    public static final char KEY = '\u0251';
-    public static final char TRIM_KEY = '\u0252';
+class PhakeWhenMethodCallTypeProvider implements PhpTypeProvider4 {
+    private static final char KEY = '\u0255';
 
     @Override
     public char getKey() {
@@ -31,38 +31,16 @@ class PhakeMockTypeProvider implements PhpTypeProvider4 {
             return null;
         }
 
-        if (
-            psiElement instanceof MethodReference &&
-            ((MethodReference) psiElement).isStatic() &&
-            Objects.equals(Objects.requireNonNull(((MethodReference) psiElement).getClassReference()).getName(), "Phake") &&
-            Objects.equals(((MethodReference) psiElement).getName(), "mock")
-        ) {
+        if (psiElement instanceof MethodReference) {
+            PhpExpression expression = ((MethodReference) psiElement).getClassReference();
 
-            MethodReference methodRef = (MethodReference) psiElement;
-            String refSignature = methodRef.getSignature();
-
-            if (StringUtil.isEmpty(refSignature)) {
-                return null;
-            }
-
-            PsiElement[] parameters = methodRef.getParameters();
-
-            if (parameters.length == 0) {
-                return null;
-            }
-
-            PsiElement parameter = parameters[0];
-
-            String signature = null;
-
-            if ((parameter instanceof StringLiteralExpression)) {
-                signature = ((StringLiteralExpression) parameter).getContents();
-            } else if ((parameter instanceof ClassConstantReference || parameter instanceof FieldReference)) {
-                signature = ((PhpReference) parameter).getSignature();
-            }
-
-            if (StringUtil.isNotEmpty(signature)) {
-                return new PhpType().add("#" + getKey() + refSignature + TRIM_KEY + signature);
+            if (
+                expression instanceof MethodReference &&
+                expression.getFirstChild() instanceof ClassReference &&
+                Objects.requireNonNull(((ClassReference) expression.getFirstChild()).getName()).equals("Phake") &&
+                Objects.requireNonNull(Objects.requireNonNull(expression).getName()).equals("when")
+            ) {
+                return new PhpType().add("#" + getKey() + "#K#C\\Phake_Proxies_AnswerBinderProxy.class|#K#C\\Phake\\Proxies\\AnswerBinderProxy.class");
             }
         }
 
@@ -76,24 +54,28 @@ class PhakeMockTypeProvider implements PhpTypeProvider4 {
 
     @Override
     public Collection<? extends PhpNamedElement> getBySignature(String expression, Set<String> set, int i, Project project) {
-        // get back our original call
-        int endIndex = expression.lastIndexOf(TRIM_KEY);
-        if(endIndex == -1) {
-            return null;
-        }
-
-        String parameter = expression.substring(endIndex + 1);
 
         Collection<PhpNamedElement> elements = new HashSet<>();
 
         PhpIndex phpIndex = PhpIndex.getInstance(project);
 
-        String parameterResolved = resolvedParameter(phpIndex, parameter);
-        if (parameterResolved == null) {
-            return elements;
-        }
+        if (!expression.contains("|")) {
+            String parameterResolved = resolvedParameter(phpIndex, expression);
+            if (parameterResolved == null) {
+                return elements;
+            }
 
-        elements.addAll(PhpIndex.getInstance(project).getAnyByFQN(parameterResolved));
+            elements.addAll(phpIndex.getAnyByFQN(parameterResolved));
+        } else {
+            for (String s : expression.split("\\|")) {
+                String parameterResolved = resolvedParameter(phpIndex, s);
+                if (parameterResolved == null) {
+                    return elements;
+                }
+
+                elements.addAll(phpIndex.getAnyByFQN(parameterResolved));
+            }
+        }
 
         return elements;
     }
