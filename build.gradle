@@ -51,5 +51,5 @@ test {
 
 runPluginVerifier {
     ideVersions = Eval.me(pluginVerifierIdeVersions)
-    verifierVersion = 1.256
+    verifierVersion = "1.256"
 }
