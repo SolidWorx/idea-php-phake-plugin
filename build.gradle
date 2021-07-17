@@ -32,7 +32,9 @@ intellij {
         "com.jetbrains.php:${phpPluginVersion}"
     ]
     patchPluginXml {
-        version pluginVersion
+        version = pluginVersion
+        sinceBuild = pluginSinceBuild
+        untilBuild = pluginUntilBuild
         changeNotes = changelog.getUnreleased().toHTML()
     }
 }
