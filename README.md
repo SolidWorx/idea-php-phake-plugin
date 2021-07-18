@@ -1,8 +1,8 @@
 # PHPStorm Phake Plugin
 
 ![Build](https://github.com/SolidWorx/idea-php-phake-plugin/workflows/Build/badge.svg)
-[![Version](https://img.shields.io/jetbrains/plugin/v/PLUGIN_ID.svg)](https://plugins.jetbrains.com/plugin/PLUGIN_ID)
-[![Downloads](https://img.shields.io/jetbrains/plugin/d/PLUGIN_ID.svg)](https://plugins.jetbrains.com/plugin/PLUGIN_ID)
+[![Version](https://img.shields.io/jetbrains/plugin/v/17261.svg)](https://plugins.jetbrains.com/plugin/PLUGIN_ID)
+[![Downloads](https://img.shields.io/jetbrains/plugin/d/17261.svg)](https://plugins.jetbrains.com/plugin/PLUGIN_ID)
 
 PHPStorm plugin for the [Phake](https://github.com/phake/phake) mocking framework to allow autocompletion for stubs and mocks.
 This plugin supports Phake version 3 and 4.
