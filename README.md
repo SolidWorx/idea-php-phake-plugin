@@ -5,6 +5,7 @@
 [![Downloads](https://img.shields.io/jetbrains/plugin/d/PLUGIN_ID.svg)](https://plugins.jetbrains.com/plugin/PLUGIN_ID)
 
 PHPStorm plugin for the [Phake](https://github.com/phake/phake) mocking framework to allow autocompletion for stubs and mocks.
+This plugin supports Phake version 3 and 4.
 
 ## Features
 
