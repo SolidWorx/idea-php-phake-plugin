@@ -4,7 +4,29 @@
     <vendor email="open-source@solidworx.co" url="https://github.com/SolidWorx/idea-php-phake-plugin">SolidWorx</vendor>
     <version>1.0.0</version>
     <description><![CDATA[
-        PHPStorm PHP plugin for the <a href="https://github.com/phake/phake">Phake</a> mocking framework to allow autocompletion for stubs and mocks.
+        PHPStorm plugin for the <a href="https://github.com/phake/phake">Phake</a> mocking framework to allow autocompletion for stubs and mocks.
+        This plugin supports Phake version 3 and 4.</p>
+
+        <h2>Features</h2>
+
+        <h3>Autocomplete for mock objects</h3>
+        When creating mock objects using <code>Phake::mock()</code>, you can get autocomplete results for the object that is being mocked.
+        PHPStorm will see the variable returned from the <code>mock()</code> call to be an instance of the actual class being mocked, which means no more inspections about incomatible types.</p>
+
+        <h3>Autocomplete for method stub</h3>
+        Using <code>Phake::when</code>, you can get autocomplete results for the mocked class, so that you don't have to copy-paste method names or manually type them, and ensure there are no typo's in the method names.
+
+        <h3>Autocomplete for stub return calls</h3>
+        When stubbing method calls, you can get autocomplete results for the stubber proxy value to determine the return value for the method call.
+
+        <h3>Autocomplete for verification methods</h3>
+        Calls to <code>Phake::verify</code> will return autocomplete results for the mocked class to ensure you can quickly choose the correct method name.
+
+        <h3>Refactor methods will update the mocked classes</h3>
+        When you refactor any method name, all the corresponding methods will automatically be updated iin the mocks you use, so you never have to manually update your methods stubs again.
+
+        <h3>Resolving symbols</h3>
+        PHPStorm can correctly resolve all the symbols in the mocks, letting you  click through to the specific methods.
       ]]></description>
 
     <change-notes />
