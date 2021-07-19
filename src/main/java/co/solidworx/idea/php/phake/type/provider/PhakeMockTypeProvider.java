@@ -9,11 +9,14 @@ import com.jetbrains.php.lang.psi.resolve.types.PhpType;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 class PhakeMockTypeProvider extends PhakeTypeProvider {
 
     public static final char KEY = '\u0251';
     public static final char TRIM_KEY = '\u0252';
+
+    final private Stream<String> methods = Arrays.stream(new String[] { "mock", "partialMock", "partMock" });
 
     @Override
     public char getKey() {
@@ -29,10 +32,9 @@ class PhakeMockTypeProvider extends PhakeTypeProvider {
         if (
             psiElement instanceof MethodReference &&
             ((MethodReference) psiElement).isStatic() &&
-            Objects.equals(Objects.requireNonNull(((MethodReference) psiElement).getClassReference()).getName(), "Phake") &&
-            Objects.equals(((MethodReference) psiElement).getName(), "mock")
+            Objects.equals(Objects.requireNonNull(((MethodReference) psiElement).getClassReference()).getName(), className) &&
+            methods.anyMatch(Objects.requireNonNull(((MethodReference) psiElement).getName())::contains)
         ) {
-
             MethodReference methodRef = (MethodReference) psiElement;
             String refSignature = methodRef.getSignature();
 

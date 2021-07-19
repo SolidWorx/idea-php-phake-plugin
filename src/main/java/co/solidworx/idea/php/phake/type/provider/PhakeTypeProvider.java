@@ -13,9 +13,10 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Set;
 
 abstract public class PhakeTypeProvider implements PhpTypeProvider4 {
+    final protected String className = "Phake";
+
     @Override
     public @Nullable PhpType complete(String s, Project project) {
         return null;
