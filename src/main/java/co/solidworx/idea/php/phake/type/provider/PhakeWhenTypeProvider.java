@@ -8,10 +8,13 @@ import com.jetbrains.php.lang.psi.elements.*;
 import com.jetbrains.php.lang.psi.resolve.types.PhpType;
 import org.jetbrains.annotations.Nullable;
 import java.util.*;
+import java.util.stream.Stream;
 
 class PhakeWhenTypeProvider extends PhakeTypeProvider {
     private static final char KEY = '\u0253';
     private static final char TRIM_KEY = '\u0254';
+
+    final private List<String> methods = Arrays.asList("when", "verify");
 
     @Override
     public char getKey() {
@@ -31,26 +34,29 @@ class PhakeWhenTypeProvider extends PhakeTypeProvider {
             if (
                 methodRef.isStatic() &&
                 phpExpression != null &&
-                Objects.equals(phpExpression.getName(), "Phake") &&
-                (
-                    Objects.equals(methodRef.getName(), "when") ||
-                    Objects.equals(methodRef.getName(), "verify")
-                )
+                Objects.equals(phpExpression.getName(), className) &&
+                methods.contains(((MethodReference) psiElement).getName())
             ) {
                 PsiElement[] parameters = methodRef.getParameters();
                 String refSignature = methodRef.getSignature();
                 PsiElement parameter = parameters[0];
 
-                if ((parameter instanceof Variable)) {
-                    String signature = ((Variable) parameter).getSignature();
+                String signature = null;
 
-                    if (StringUtil.isNotEmpty(signature)) {
-                        int lastIndexOf = signature.lastIndexOf(PhakeMockTypeProvider.TRIM_KEY);
+                if (parameter instanceof Variable) {
+                    signature = ((Variable) parameter).getSignature();
+                } else if (parameter instanceof FieldReference) {
+                    signature = ((FieldReference) parameter).getSignature();
+                }
 
-                        if (lastIndexOf != -1) {
-                            return new PhpType().add("#" + getKey() + refSignature + TRIM_KEY + signature.substring(lastIndexOf + 1));
-                        }
+                if (StringUtil.isNotEmpty(signature)) {
+                    int lastIndexOf = signature.lastIndexOf(PhakeMockTypeProvider.TRIM_KEY);
+
+                    if (lastIndexOf != -1) {
+                        return new PhpType().add("#" + getKey() + refSignature + TRIM_KEY + signature.substring(lastIndexOf + 1));
                     }
+
+                    return new PhpType().add("#" + getKey() + refSignature + TRIM_KEY + signature);
                 }
             }
         }

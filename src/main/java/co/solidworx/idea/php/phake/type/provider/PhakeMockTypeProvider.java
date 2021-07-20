@@ -16,7 +16,7 @@ class PhakeMockTypeProvider extends PhakeTypeProvider {
     public static final char KEY = '\u0251';
     public static final char TRIM_KEY = '\u0252';
 
-    final private Stream<String> methods = Arrays.stream(new String[] { "mock", "partialMock", "partMock" });
+    final private List<String> methods = Arrays.asList("mock", "partialMock", "partMock");
 
     @Override
     public char getKey() {
@@ -33,7 +33,7 @@ class PhakeMockTypeProvider extends PhakeTypeProvider {
             psiElement instanceof MethodReference &&
             ((MethodReference) psiElement).isStatic() &&
             Objects.equals(Objects.requireNonNull(((MethodReference) psiElement).getClassReference()).getName(), className) &&
-            methods.anyMatch(Objects.requireNonNull(((MethodReference) psiElement).getName())::contains)
+            methods.contains(((MethodReference) psiElement).getName())
         ) {
             MethodReference methodRef = (MethodReference) psiElement;
             String refSignature = methodRef.getSignature();
