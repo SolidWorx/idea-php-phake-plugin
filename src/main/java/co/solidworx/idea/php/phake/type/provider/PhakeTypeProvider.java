@@ -23,7 +23,7 @@ abstract public class PhakeTypeProvider implements PhpTypeProvider4 {
     }
 
     @Nullable
-    protected static String resolvedParameter(@NotNull PhpIndex phpIndex, @NotNull String parameter) {
+    protected static String resolveParameter(@NotNull PhpIndex phpIndex, @NotNull String parameter) {
         // "Foo::class"
         if (parameter.startsWith("#K#C") && parameter.endsWith(".class")) {
             return StringUtils.stripStart(parameter.substring(4, parameter.length() - 6), "\\");
@@ -103,24 +103,23 @@ abstract public class PhakeTypeProvider implements PhpTypeProvider4 {
         PhpIndex phpIndex = PhpIndex.getInstance(project);
 
         if (!expression.contains("|")) {
-            String parameterResolved = resolvedParameter(phpIndex, expression);
-            if (parameterResolved == null) {
-                return elements;
-            }
-
-            elements.addAll(phpIndex.getAnyByFQN(parameterResolved));
+            elements.addAll(getNamedElements(phpIndex, expression, expression));
         } else {
             for (String s : expression.split("\\|")) {
-                String parameterResolved = resolvedParameter(phpIndex, s);
-                if (parameterResolved == null) {
-                    return elements;
-                }
-
-                elements.addAll(phpIndex.getAnyByFQN(parameterResolved));
+                elements.addAll(getNamedElements(phpIndex, expression, s));
             }
         }
 
         return elements;
+    }
+
+    private Collection<? extends PhpNamedElement> getNamedElements(PhpIndex phpIndex, String expression, String signature) {
+        String parameterResolved = resolveParameter(phpIndex, signature);
+        if (parameterResolved == null) {
+            return phpIndex.getBySignature(expression);
+        }
+
+        return phpIndex.getAnyByFQN(parameterResolved);
     }
 
     public Collection<? extends PhpNamedElement> getElementsBySignature(char key, String expression, Project project) {
