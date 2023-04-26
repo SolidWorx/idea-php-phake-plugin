@@ -11,8 +11,8 @@ import java.util.*;
 
 class PhakeMockTypeProvider extends PhakeTypeProvider {
 
-    public static final char KEY = '\u0251';
-    public static final char TRIM_KEY = '\u0252';
+    public static final char KEY = 'ɑ';
+    public static final char TRIM_KEY = 'ɒ';
 
     final private List<String> methods = Arrays.asList("mock", "partialMock", "partMock");
 
@@ -28,12 +28,11 @@ class PhakeMockTypeProvider extends PhakeTypeProvider {
         }
 
         if (
-            psiElement instanceof MethodReference &&
+            psiElement instanceof MethodReference methodRef &&
             ((MethodReference) psiElement).isStatic() &&
             Objects.equals(Objects.requireNonNull(((MethodReference) psiElement).getClassReference()).getName(), className) &&
             methods.contains(((MethodReference) psiElement).getName())
         ) {
-            MethodReference methodRef = (MethodReference) psiElement;
             String refSignature = methodRef.getSignature();
 
             if (StringUtil.isEmpty(refSignature)) {

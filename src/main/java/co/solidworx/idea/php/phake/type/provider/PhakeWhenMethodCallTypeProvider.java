@@ -10,7 +10,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 
 class PhakeWhenMethodCallTypeProvider extends PhakeTypeProvider {
-    private static final char KEY = '\u0255';
+    private static final char KEY = 'ɕ';
 
     @Override
     public char getKey() {

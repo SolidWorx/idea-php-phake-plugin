@@ -10,8 +10,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 
 class PhakeWhenTypeProvider extends PhakeTypeProvider {
-    private static final char KEY = '\u0253';
-    private static final char TRIM_KEY = '\u0254';
+    private static final char KEY = 'ɓ';
+    private static final char TRIM_KEY = 'ɔ';
 
     final private List<String> methods = Arrays.asList("when", "verify");
 
@@ -26,8 +26,7 @@ class PhakeWhenTypeProvider extends PhakeTypeProvider {
             return null;
         }
 
-        if (psiElement instanceof MethodReference) {
-            MethodReference methodRef = (MethodReference) psiElement;
+        if (psiElement instanceof MethodReference methodRef) {
             PhpExpression phpExpression = methodRef.getClassReference();
 
             if (
