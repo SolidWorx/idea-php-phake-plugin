@@ -29,7 +29,6 @@ java {
 }
 
 intellij {
-    pluginName = pluginName
     version = ideaVersion
     type = platformType
     updateSinceUntilBuild = true
