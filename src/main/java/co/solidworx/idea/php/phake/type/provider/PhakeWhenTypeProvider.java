@@ -8,7 +8,6 @@ import com.jetbrains.php.lang.psi.elements.*;
 import com.jetbrains.php.lang.psi.resolve.types.PhpType;
 import org.jetbrains.annotations.Nullable;
 import java.util.*;
-import java.util.stream.Stream;
 
 class PhakeWhenTypeProvider extends PhakeTypeProvider {
     private static final char KEY = '\u0253';
