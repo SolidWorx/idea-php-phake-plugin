@@ -2,7 +2,7 @@
     <id>co.solidworx.idea.php.phake</id>
     <name>Phake</name>
     <vendor email="open-source@solidworx.co" url="https://github.com/SolidWorx/idea-php-phake-plugin">SolidWorx</vendor>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <description><![CDATA[
         PHPStorm plugin for the <a href="https://github.com/phake/phake">Phake</a> mocking framework to allow autocompletion for stubs and mocks.
         This plugin supports Phake version 3 and 4.</p>
